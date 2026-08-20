@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<title>⚡ MOVECOIN</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+input,textarea{user-select:text;-webkit-user-select:text}
+body{background:#07070f;font-family:'Segoe UI',system-ui,sans-serif;color:#e2e8f0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:auto;touch-action:manipulation}
+#root{min-height:100vh;width:100%;display:flex;align-items:flex-start;justify-content:center;overflow:visible}
+canvas{display:block;border-radius:12px;box-shadow:0 0 40px rgba(0,255,180,.15)}
+.ui-overlay{position:fixed;inset:0;pointer-events:none;z-index:10}
+.hud{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hud-box{background:rgba(10,12,28,.88);border:1px solid rgba(0,255,180,.3);border-radius:10px;padding:7px 12px;font-size:13px;font-weight:600}
+.hud-box span{color:#00ffb4}.hud-box .timer{color:#fbbf24}
+.menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:rgba(5,6,16,.95);pointer-events:auto;z-index:20;overflow-y:auto;overflow-x:hidden;padding:22px 14px 80px;justify-content:flex-start}
+.menu h1{font-size:clamp(1.7rem,5vw,3rem);background:linear-gradient(135deg,#00ffb4,#7b6cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.menu p{color:#94a3b8;margin-bottom:10px;font-size:13px;text-align:center;max-width:420px;line-height:1.45}
+.btn{background:linear-gradient(135deg,#00c98a,#00ffb4);color:#07070f;border:none;padding:10px 26px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;margin:4px;box-shadow:0 4px 18px rgba(0,255,180,.3);transition:transform .12s}
+.btn:hover{transform:scale(1.05)}
+.btn.secondary{background:transparent;border:2px solid #00ffb4;color:#00ffb4;box-shadow:none}
+.btn.secret{background:linear-gradient(135deg,#67e8f9,#a5f3fc);color:#0c4a6e}
+@media(max-width:768px),(pointer:coarse){.mobile-controls{display:flex}.controls-hint{display:none}}
+body{overflow-x:hidden;overflow-y:auto}
+html,body,#root{width:100%;min-height:100%;margin:0}
+canvas{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<script type="text/babel">
+const {useEffect,useRef,useState,useCallback}=React;
+const storage={get(k,d){try{const v=localStorage.getItem(k);return v!=null?JSON.parse(v):d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const W=960,H=540;
+function App(){const [screen,setScreen]=useState('menu');const canvasRef=useRef(null);return(<><div id="spectral-bg"></div><div style={{position:'relative',width:'100%',maxWidth:W,margin:'0 auto',minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><canvas ref={canvasRef} width={W} height={H} style={{width:'100%',maxHeight:'100vh',objectFit:'contain'}}/>{screen==='menu'&&(<div className="menu"><h1>⚡ MOVECOIN v4</h1><p>Le jeu social où chaque niveau cache quelque chose.</p><button className="btn" onClick={()=>setScreen('playing')}>🎮 JOUER</button><button className="btn secret">☕ SALLE DÉTENTE</button><p style={{fontSize:11,color:'#94a3b8',marginTop:20}}>Déploiement Render en cours...</p></div>)}</div></>
+)}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

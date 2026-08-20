@@ -1,0 +1,13 @@
+{
+  "name": "movecoin",
+  "version": "4.0.0",
+  "description": "MOVECOIN — plateforme 2D + Oasis PNJ autonome",
+  "private": true,
+  "scripts": {
+    "start": "npx serve -s . -l $PORT",
+    "build": "echo 'Static site — no build step'"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
